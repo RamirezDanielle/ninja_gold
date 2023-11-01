@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='/style.css')}}">
+    <title>Ninja Gold</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h6 class="counter m-3 lead">YOUR GOLD : {{session.golds}}</h6>
+        <div class="d-flex justify-content-between">
+            <div class="boxes text-center">
+                <h4 class="m-4">FARM</h4>
+                <p>EARNS 10-20 GOLDS</p>
+                <form action="/process_money" method="post">
+                    <input type="hidden" name="ninja_gold" value="farm" />
+                    <input type="submit" value="FIND GOLD!"/>
+                </form>
+            </div>
+            <div class="boxes text-center">
+                <h4 class="m-4">CAVE</h4>
+                <p>EARNS 5-10 GOLDS</p>
+                <form action="/process_money" method="post">
+                    <input type="hidden" name="ninja_gold" value="cave" />
+                    <input type="submit" value="FIND GOLD!"/>
+                </form>
+            </div>
+            <div class="boxes text-center">
+                <h4 class="m-4">HOUSE</h4>
+                <p>EARNS 2-5 GOLDS</p>
+                <form action="/process_money" method="post">
+                    <input type="hidden" name="ninja_gold" value="house" />
+                    <input type="submit" value="FIND GOLD!"/>
+                </form>
+            </div>
+            <div class="boxes text-center">
+                <h4 class="m-4">CASINO</h4>
+                <p>EARNS/TAKES 0-50 GOLDS</p>
+                <form action="/process_money" method="post">
+                    <input type="hidden" name="ninja_gold" value="casino"/>
+                    <input type="submit" value="FIND GOLD!"/>
+                </form>
+            </div>
+        </div>
+        <div class="display m-3 lead">
+            <div class="card border-dark bold">
+            {% for d in session.activities %}
+            <p class="text-success m-2">{{d}}</p>
+            {% endfor %}
+            {% for d in session.loss %}
+            <p class="text-danger m-2">{{d}} </p>
+            {% endfor %}
+        </div>
+        </div>
+        <a href="/clear" class="btn btn-primary m-3">RESET</a>
+    </div>
+</body>
+</html>
